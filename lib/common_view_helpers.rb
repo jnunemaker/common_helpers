@@ -1,11 +1,11 @@
 module CommonViewHelpers
   def hidden_return_to_current(sep='?')
-    hidden_field_tag('return_to', request.request_uri)
+    content_tag(:div, hidden_field_tag('return_to', request.request_uri))
   end
   
   def hidden_return_to_referer(sep='?')
     r = request.env['HTTP_REFERER']
-    hidden_field_tag('return_to', r) unless r.blank?
+    content_tag(:div, hidden_field_tag('return_to', r)) unless r.blank?
   end
   
   # great for appending return_to parameter to form_for and link_to
@@ -14,6 +14,10 @@ module CommonViewHelpers
   def return_to(sep="?")
     sep = sep == "&" ? "&amp;" : sep
     "#{sep}return_to=#{CGI::escape(request.request_uri)}"
+  end
+  
+  def url_for_return_to(args)
+    params[:return_to].blank? ? url_for(args) : params[:return_to]
   end
   
   def label_tag(element_id, text, options={})
