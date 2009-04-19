@@ -71,32 +71,6 @@ module CommonViewHelpers
     active_section?(controller_name_or_array, action_name_or_array) ? 'active' : ''
   end
   
-  # for use on forms and such, creates a cancel link which will append query string
-  # variables and link to index
-  def link_to_cancel(*reject)
-    if params[:q].blank?
-      link_to 'cancel', url_for(:action => 'index') + get_all_gets(:reject => reject)
-    else
-      link_to 'cancel', url_for(:action => 'search') + get_all_gets(:reject => reject)
-    end
-  end  
-  
-  def link_to_view_all(options={})
-    options.reverse_merge!(:reject => [], :class => '')
-    css_class = options.delete(:class)
-    reject    = options.delete(:reject)
-    
-    if params[:q].blank?
-      link_to 'View All', 
-              url_for(:action => 'index') + get_all_gets(:reject => reject), 
-              :class => css_class
-    else
-      link_to 'Return To Search Results', 
-              url_for(:action => 'search') + get_all_gets(:reject => reject), 
-              :class => css_class
-    end
-  end
-  
   # displays flash messages by type of message
   def display_flash_messages
     flash_types, string = [ :error, :warning, :notice ], ''

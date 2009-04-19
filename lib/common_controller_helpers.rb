@@ -1,6 +1,5 @@
 module CommonControllerHelpers
   def self.included(base)
-    # also make this helper available to views
     base.helper_method :get_all_gets
   end
   
