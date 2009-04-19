@@ -98,7 +98,7 @@ module CommonViewHelpers
   end
   
   # displays flash messages by type of message
-  def display_flash_message
+  def display_flash_messages
     flash_types, string = [ :error, :warning, :notice ], ''
     flash_types.each { |ft| string << "<div class=\"flash #{ft.to_s}\">#{flash[ft]}</div>" unless flash[ft].nil? }
     string
